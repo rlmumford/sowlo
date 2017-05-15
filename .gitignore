@@ -1,0 +1,18 @@
+# Ignore core and vendor
+core
+vendor
+sites
+modules/contrib
+
+# Ignore base files
+index.php
+update.php
+.csslintrc
+.editorconfig
+.eslintignore
+.eslintrc
+.gitattributes
+.htaccess
+autoload.php
+robots.txt
+web.config
