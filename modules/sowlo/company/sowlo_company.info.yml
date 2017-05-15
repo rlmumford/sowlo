@@ -1,0 +1,7 @@
+type: module
+name: Sowlo Company Management
+description: 'Manage Companies'
+package: Sowlo
+core: 8.x
+dependencies:
+  - sowlo_base

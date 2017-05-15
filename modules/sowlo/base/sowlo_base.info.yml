@@ -1,0 +1,7 @@
+type: module
+name: Sowlo Base
+description: 'Manage Sowlo Things'
+package: Sowlo
+core: 8.x
+dependencies:
+  - profile
