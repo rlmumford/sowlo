@@ -1,0 +1,3 @@
+[submodule "modules/rlmumford/location"]
+	path = modules/rlmumford/location
+	url = git@github.com:rlmumford/location.git
