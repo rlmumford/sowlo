@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "754d11b2d5d24f6f43da7217ada42fac",
+    "content-hash": "4a765d2a237ce2a5e1d84ca80fbf8527",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1167,6 +1167,57 @@
             "time": "2017-03-08 21:07:49"
         },
         {
+            "name": "drupal/name",
+            "version": "1.0.0-beta1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/name",
+                "reference": "8.x-1.0-beta1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/name-8.x-1.0-beta1.zip",
+                "reference": null,
+                "shasum": "e5d0027b0a2a1f52bfe804581d70239764a7ccaf"
+            },
+            "require": {
+                "drupal/core": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.0-beta1",
+                    "datestamp": "1461325440"
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Alan D.",
+                    "homepage": "https://www.drupal.org/user/198838"
+                },
+                {
+                    "name": "rconstantine",
+                    "homepage": "https://www.drupal.org/user/94676"
+                },
+                {
+                    "name": "webflo",
+                    "homepage": "https://www.drupal.org/user/254778"
+                }
+            ],
+            "description": "Defines a persons name field type.",
+            "homepage": "https://www.drupal.org/project/name",
+            "support": {
+                "source": "http://cgit.drupalcode.org/name"
+            }
+        },
+        {
             "name": "drupal/profile",
             "version": "1.0.0-beta1",
             "source": {
@@ -1177,7 +1228,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://ftp.drupal.org/files/projects/profile-8.x-1.0-beta1.zip",
-                "reference": null,
+                "reference": "8.x-1.0-beta1",
                 "shasum": "0a60fbae2ec3985eaf36574974ede24499b8faf9"
             },
             "require": {
@@ -3748,6 +3799,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "drupal/profile": 10,
+        "drupal/name": 10,
         "drupal/devel": 5
     },
     "prefer-stable": false,
