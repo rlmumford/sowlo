@@ -5,3 +5,6 @@ package: Sowlo
 core: 8.x
 dependencies:
   - profile
+  - name
+  - telephone
+  - address
