@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.indiv_uk_citizen
+    - profile.type.individual
+id: profile.individual.indiv_uk_citizen
+field_name: indiv_uk_citizen
+entity_type: profile
+bundle: individual
+label: 'UK Citizen'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'I am a UK Citizen'
+  off_label: 'I am not a UK Citizen'
+field_type: boolean

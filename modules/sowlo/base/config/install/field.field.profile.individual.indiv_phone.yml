@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.indiv_phone
+    - profile.type.individual
+  module:
+    - telephone
+id: profile.individual.indiv_phone
+field_name: indiv_phone
+entity_type: profile
+bundle: individual
+label: Phone
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: telephone
