@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.proj_from
+    - paragraphs.paragraphs_type.experience_project
+  module:
+    - datetime
+id: paragraph.experience_project.proj_from
+field_name: proj_from
+entity_type: paragraph
+bundle: experience_project
+label: From
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.workexp_location
+    - location.type.address
+    - profile.type.experience_work
+id: profile.experience_work.workexp_location
+field_name: workexp_location
+entity_type: profile
+bundle: experience_work
+label: Location
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:location'
+  handler_settings:
+    target_bundles:
+      address: address
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: education_qualification
+label: 'Education Qualification'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }
+

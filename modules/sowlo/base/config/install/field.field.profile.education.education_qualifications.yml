@@ -1,0 +1,36 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.education_qualifications
+    - paragraphs.paragraphs_type.education_qualification
+    - profile.type.education
+  module:
+    - entity_reference_revisions
+id: profile.education.education_qualifications
+field_name: education_qualifications
+entity_type: profile
+bundle: education
+label: Qualifications
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      education_qualification: education_qualification
+    target_bundles_drag_drop:
+      education_qualification:
+        enabled: true
+        weight: 4
+      experience_responsibilities:
+        weight: 5
+        enabled: false
+      experience_skills:
+        weight: 6
+        enabled: false
+field_type: entity_reference_revisions

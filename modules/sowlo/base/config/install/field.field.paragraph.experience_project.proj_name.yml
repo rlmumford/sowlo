@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.proj_name
+    - paragraphs.paragraphs_type.experience_project
+id: paragraph.experience_project.proj_name
+field_name: proj_name
+entity_type: paragraph
+bundle: experience_project
+label: Name
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

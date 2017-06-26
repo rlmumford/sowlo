@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.skill_skill
+    - paragraphs.paragraphs_type.experience_skills
+    - taxonomy.vocabulary.skills
+id: paragraph.experience_skills.skill_skill
+field_name: skill_skill
+entity_type: paragraph
+bundle: experience_skills
+label: Skill
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      skills: skills
+    sort:
+      field: _none
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

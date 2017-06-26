@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.workexp_skills
+    - paragraphs.paragraphs_type.experience_skills
+    - profile.type.experience_work
+  module:
+    - entity_reference_revisions
+id: profile.experience_work.workexp_skills
+field_name: workexp_skills
+entity_type: profile
+bundle: experience_work
+label: Skills
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      experience_skills: experience_skills
+    target_bundles_drag_drop:
+      experience_responsibilities:
+        weight: 3
+        enabled: false
+      experience_skills:
+        enabled: true
+        weight: 4
+field_type: entity_reference_revisions

@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies: {  }
+id: education
+label: Education
+registration: false
+multiple: true
+roles:
+  authenticated: '0'
+  administrator: '0'
+weight: 0
+use_revisions: true

@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.education_institution
+    - profile.type.education
+    - taxonomy.vocabulary.education_institutions
+id: profile.education.education_institution
+field_name: education_institution
+entity_type: profile
+bundle: education
+label: Institution
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      education_institutions: education_institutions
+    sort:
+      field: _none
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

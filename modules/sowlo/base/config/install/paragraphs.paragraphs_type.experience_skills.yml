@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: experience_skills
+label: Skills
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

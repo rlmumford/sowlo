@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.workexp_company
+    - profile.type.experience_work
+    - taxonomy.vocabulary.companies
+id: profile.experience_work.workexp_company
+field_name: workexp_company
+entity_type: profile
+bundle: experience_work
+label: Company
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      companies: companies
+    sort:
+      field: _none
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

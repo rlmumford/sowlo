@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Education Qualifications'
+vid: education_qualifications
+description: ''
+hierarchy: 0
+weight: 0

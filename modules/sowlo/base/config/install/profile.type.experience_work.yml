@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies: {  }
+id: experience_work
+label: 'Work Experience'
+registration: false
+multiple: true
+roles:
+  authenticated: '0'
+  administrator: '0'
+weight: 0
+use_revisions: true

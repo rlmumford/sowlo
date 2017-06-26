@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.resp_responsibility
+    - paragraphs.paragraphs_type.experience_responsibilities
+    - taxonomy.vocabulary.responsibilities
+id: paragraph.experience_responsibilities.resp_responsibility
+field_name: resp_responsibility
+entity_type: paragraph
+bundle: experience_responsibilities
+label: Responsibility
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      responsibilities: responsibilities
+    sort:
+      field: _none
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

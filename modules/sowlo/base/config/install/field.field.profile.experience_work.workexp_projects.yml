@@ -1,0 +1,40 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.workexp_projects
+    - paragraphs.paragraphs_type.experience_project
+    - profile.type.experience_work
+  module:
+    - entity_reference_revisions
+id: profile.experience_work.workexp_projects
+field_name: workexp_projects
+entity_type: profile
+bundle: experience_work
+label: Projects
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      experience_project: experience_project
+    target_bundles_drag_drop:
+      education_qualification:
+        weight: 5
+        enabled: false
+      experience_project:
+        enabled: true
+        weight: 6
+      experience_responsibilities:
+        weight: 7
+        enabled: false
+      experience_skills:
+        weight: 8
+        enabled: false
+field_type: entity_reference_revisions
+

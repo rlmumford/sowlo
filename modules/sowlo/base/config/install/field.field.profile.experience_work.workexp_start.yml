@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.workexp_start
+    - profile.type.experience_work
+  module:
+    - datetime
+id: profile.experience_work.workexp_start
+field_name: workexp_start
+entity_type: profile
+bundle: experience_work
+label: 'Start Date'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

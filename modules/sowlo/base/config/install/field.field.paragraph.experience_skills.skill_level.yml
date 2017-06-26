@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.skill_level
+    - paragraphs.paragraphs_type.experience_skills
+  module:
+    - options
+id: paragraph.experience_skills.skill_level
+field_name: skill_level
+entity_type: paragraph
+bundle: experience_skills
+label: Level
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

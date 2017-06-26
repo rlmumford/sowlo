@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.qualification_level
+    - paragraphs.paragraphs_type.education_qualification
+  module:
+    - options
+id: paragraph.education_qualification.qualification_level
+field_name: qualification_level
+entity_type: paragraph
+bundle: education_qualification
+label: Level
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string
