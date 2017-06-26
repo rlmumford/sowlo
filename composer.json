@@ -9,7 +9,8 @@
         "drupal/core": "^8.1",
         "drupal/profile": "^1.0@beta",
         "drupal/address": "^1.0",
-        "drupal/name": "^1.0@beta"
+        "drupal/name": "^1.0@beta",
+        "drupal/paragraphs": "^1.1"
     },
     "authors": [
         {
