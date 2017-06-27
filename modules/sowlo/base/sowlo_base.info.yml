@@ -8,3 +8,7 @@ dependencies:
   - name
   - telephone
   - address
+  - paragraphs
+  - taxonomy
+  - ctools
+  - location

@@ -12,7 +12,8 @@ use Drupal\Core\Entity\EntityTypeInterface;
  *   id = "company",
  *   label = @Translation("Company"),
  *   label_singular = @Translation("company"),
- *   label_plural = @PluralTranslation(
+ *   label_plural = @Translation("companies"),
+ *   label_count = @PluralTranslation(
  *     singular = "@count company",
  *     plural = "@count companies",
  *   ),

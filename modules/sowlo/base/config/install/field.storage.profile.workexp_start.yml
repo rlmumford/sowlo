@@ -4,8 +4,8 @@ dependencies:
   module:
     - datetime
     - profile
-id: profile.field_workexp_start
-field_name: field_workexp_start
+id: profile.workexp_start
+field_name: workexp_start
 entity_type: profile
 type: datetime
 settings:

@@ -10,9 +10,9 @@ entity_type: profile
 type: name
 settings:
   components:
-    title: true
+    title: false
     given: true
-    middle: true
+    middle: false
     family: true
     credentials: true
     generational: false
