@@ -1,0 +1,60 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.experience_project.proj_company
+    - field.field.paragraph.experience_project.proj_description
+    - field.field.paragraph.experience_project.proj_from
+    - field.field.paragraph.experience_project.proj_name
+    - field.field.paragraph.experience_project.proj_to
+    - paragraphs.paragraphs_type.experience_project
+  module:
+    - datetime
+    - text
+id: paragraph.experience_project.default
+targetEntityType: paragraph
+bundle: experience_project
+mode: default
+content:
+  proj_company:
+    type: entity_reference_autocomplete
+    weight: 0
+    region: content
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  proj_description:
+    type: text_textarea
+    weight: 4
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  proj_from:
+    type: datetime_default
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  proj_name:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  proj_to:
+    type: datetime_default
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
+  uid: true
+

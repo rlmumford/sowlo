@@ -1,0 +1,58 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.profile.education.education_from
+    - field.field.profile.education.education_institution
+    - field.field.profile.education.education_qualifications
+    - field.field.profile.education.education_to
+    - profile.type.education
+  module:
+    - datetime
+    - paragraphs
+id: profile.education.default
+targetEntityType: profile
+bundle: education
+mode: default
+content:
+  education_from:
+    type: datetime_datelist
+    weight: 1
+    region: content
+    settings:
+      date_order: DMY
+      time_type: none
+      increment: 15
+    third_party_settings: {  }
+  education_institution:
+    type: entity_reference_autocomplete
+    weight: 0
+    region: content
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  education_qualifications:
+    type: paragraphs
+    weight: 3
+    region: content
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+  education_to:
+    type: datetime_datelist
+    weight: 2
+    region: content
+    settings:
+      date_order: DMY
+      time_type: none
+      increment: 15
+    third_party_settings: {  }
+hidden: {  }
+

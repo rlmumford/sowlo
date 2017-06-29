@@ -1,0 +1,41 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.education_qualification.qualification_grade
+    - field.field.paragraph.education_qualification.qualification_level
+    - field.field.paragraph.education_qualification.qualification_title
+    - paragraphs.paragraphs_type.education_qualification
+id: paragraph.education_qualification.default
+targetEntityType: paragraph
+bundle: education_qualification
+mode: default
+content:
+  qualification_grade:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  qualification_level:
+    type: options_select
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  qualification_title:
+    type: entity_reference_autocomplete
+    weight: 1
+    region: content
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
+  uid: true
+

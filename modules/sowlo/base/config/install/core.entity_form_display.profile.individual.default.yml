@@ -1,0 +1,72 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.profile.individual.indiv_dob
+    - field.field.profile.individual.indiv_image
+    - field.field.profile.individual.indiv_location
+    - field.field.profile.individual.indiv_name
+    - field.field.profile.individual.indiv_phone
+    - field.field.profile.individual.indiv_uk_citizen
+    - image.style.thumbnail
+    - profile.type.individual
+  module:
+    - datetime
+    - image
+    - inline_entity_form
+    - name
+    - telephone
+id: profile.individual.default
+targetEntityType: profile
+bundle: individual
+mode: default
+content:
+  indiv_dob:
+    type: datetime_datelist
+    weight: 3
+    region: content
+    settings:
+      date_order: DMY
+      time_type: none
+      increment: 15
+    third_party_settings: {  }
+  indiv_image:
+    type: image_image
+    weight: 4
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+  indiv_location:
+    type: inline_entity_form_simple
+    weight: 1
+    region: content
+    settings:
+      form_mode: default
+      override_labels: false
+      label_singular: ''
+      label_plural: ''
+    third_party_settings: {  }
+  indiv_name:
+    type: name_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  indiv_phone:
+    type: telephone_default
+    weight: 2
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  indiv_uk_citizen:
+    type: boolean_checkbox
+    weight: 5
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+hidden: {  }
+

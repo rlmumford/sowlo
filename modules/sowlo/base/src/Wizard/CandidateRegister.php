@@ -22,6 +22,15 @@ class CandidateRegister extends FormWizardBase {
     return $this->t('Condidate Register Name');
   }
 
+  public function getTempstore() {
+    $session = \Drupal::service('session');
+    if (!$session->isStarted()) {
+      $session->set('registering_candidate', TRUE);
+      $session->start();
+    }
+    return \Drupal::service('user.private_tempstore')->get($this->getTempstoreId());
+  }
+
   /**
    * {@inheritdoc}
    */

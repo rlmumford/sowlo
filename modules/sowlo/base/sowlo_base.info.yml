@@ -12,3 +12,5 @@ dependencies:
   - taxonomy
   - ctools
   - location
+  - inline_entity_form
+  - ief_table_view_mode
