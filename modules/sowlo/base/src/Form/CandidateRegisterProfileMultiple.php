@@ -21,7 +21,6 @@ abstract class CandidateRegisterProfileMultiple extends CandidateRegisterProfile
    */
   protected function init(FormStateInterface $form_state) {
     $cached_values = &$form_state->getTemporaryValue('wizard');
-    dpm($cached_values, 'CachedValues');
 
     $profile_indicator = 'new';
     $step = $this->getProfileStep();
@@ -47,6 +46,15 @@ abstract class CandidateRegisterProfileMultiple extends CandidateRegisterProfile
     $cached_values = &$form_state->getTemporaryValue('wizard');
     $step = $this->getProfileStep();
     $cached_values['candidate_'.$step][$cached_values["candidate_current_{$step}_profile"]] = $this->entity;
+  }
+
+  /**
+   * Add another submit.
+   */
+  public function submitFormAddAnother(array $form, FormStateInterface $form_state) {
+    $cached_values = &$form_state->getTemporaryValue('wizard');
+    $step = $this->getProfileStep();
+    $cached_values["candidate_current_{$step}_profile"] = 'new';
   }
 
   /**

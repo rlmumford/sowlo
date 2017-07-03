@@ -66,7 +66,6 @@ abstract class CandidateRegisterProfile extends ContentEntityForm {
    */
   protected function init(FormStateInterface $form_state) {
     $cached_values = &$form_state->getTemporaryValue('wizard');
-    dpm($cached_values);
     $step = $this->getProfileStep();
     if (empty($cached_values['candidate_'.$step])) {
       $cached_values['candidate_'.$step] = $this->entityManager->getStorage('profile')->create(['type' => $this->getProfileType()]);

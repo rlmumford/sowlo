@@ -5,6 +5,7 @@ namespace Drupal\sowlo_base\Wizard;
 use Drupal\Core\Form\FormInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\ctools\Wizard\FormWizardBase;
+use Drupal\sowlo_base\Form\CandidateRegisterProfileMultiple;
 
 class CandidateRegister extends FormWizardBase {
 
@@ -85,8 +86,24 @@ class CandidateRegister extends FormWizardBase {
    * {@inheritdoc}
    */
   public function submitForm(array $form, FormStateInterface $form_state) {
-    $form_state->setValue('op', $form_state->get('op'));
-    parent::submitForm($form, $form_state);
+    $el = $form_state->getTriggeringElement();
+    if (in_array($el['#op'], ['next','add_another'])) {
+      $cached_values = $form_state->getTemporaryValue('wizard');
+      if ($form_state->hasValue('label')) {
+        $cached_values['label'] = $form_state->getValue('label');
+      }
+      if ($form_state->hasValue('id')) {
+        $cached_values['id'] = $form_state->getValue('id');
+      }
+      if (is_null($this->machine_name) && !empty($cached_values['id'])) {
+        $this->machine_name = $cached_values['id'];
+      }
+      $this->getTempstore()->set($this->getMachineName(), $cached_values);
+
+      if ($el['#op'] == 'next' && !$form_state->get('ajax')) {
+        $form_state->setRedirect($this->getRouteName(), $this->getNextParameters($cached_values));
+      }
+    }
   }
 
   /**
@@ -96,6 +113,21 @@ class CandidateRegister extends FormWizardBase {
     $actions = parent::actions($form_object, $form_state);
     array_unshift($actions['submit']['#validate'], '::storeOperation');
     $actions['#weight'] = 1000;
+
+    $actions['submit']['#op'] = 'next';
+
+    if ($form_object instanceof CandidateRegisterProfileMultiple) {
+      $add_another_submit = $actions['submit']['#submit'];
+      $add_another_submit[] = [$form_object, 'submitFormAddAnother'];
+      $actions['add_another'] = [
+        '#type' => 'submit',
+        '#value' => $this->t('Add Another @type', ['@type' => ($this->step == 'work') ? 'Job' : 'School']),
+        '#submit' => $add_another_submit,
+        '#validate' => $actions['submit']['#validate'],
+        '#weight' => -5,
+        '#op' => 'add_another',
+      ];
+    }
     return $actions;
   }
 }
