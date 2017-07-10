@@ -50,11 +50,13 @@ class CandidateRegisterWork extends CandidateRegisterProfileMultiple {
       return FALSE;
     }
 
+    $values = $profile->toArray();
+    $company = $values['workexp_company'][0]['entity']->name->value;
     $row['job']['data'] = $this->t(
       '@job at @company',
       [
         '@job' => $profile->workexp_job_title->value,
-        '@company' => 'Company',
+        '@company' => $company,
       ]
     );
 
@@ -65,7 +67,6 @@ class CandidateRegisterWork extends CandidateRegisterProfileMultiple {
         '@end' => 'Now',
       ]
     );
-    dpm($profile);
 
     $row += parent::buildProfileSummaryTableRow($profile, $indicator, $is_current);
     return $row;

@@ -8,7 +8,7 @@ dependencies:
     - field.field.profile.education.education_to
     - profile.type.education
   module:
-    - datetime
+    - date_tools
     - paragraphs
 id: profile.education.default
 targetEntityType: profile
@@ -16,10 +16,13 @@ bundle: education
 mode: default
 content:
   education_from:
-    type: datetime_datelist
+    type: datetime_partialdatelist
     weight: 1
     region: content
     settings:
+      components:
+        year: year
+        month: month
       date_order: DMY
       time_type: none
       increment: 15
@@ -46,10 +49,13 @@ content:
       default_paragraph_type: ''
     third_party_settings: {  }
   education_to:
-    type: datetime_datelist
+    type: datetime_partialdatelist
     weight: 2
     region: content
     settings:
+      components:
+        year: year
+        month: month
       date_order: DMY
       time_type: none
       increment: 15

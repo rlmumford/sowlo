@@ -20,7 +20,8 @@ abstract class CandidateRegisterProfileMultiple extends CandidateRegisterProfile
   /**
    * {@inheritdoc}
    */
-  protected function init(FormStateInterface $form_state) {
+  public function buildForm(array $form, FormStateInterface $form_state) {
+    $form['#cache'] = ['max-age' => 0];
     $cached_values = &$form_state->getTemporaryValue('wizard');
 
     $profile_indicator = 'new';
@@ -36,14 +37,7 @@ abstract class CandidateRegisterProfileMultiple extends CandidateRegisterProfile
     }
     $this->setEntity($cached_values['candidate_'.$step][$profile_indicator]);
 
-    ContentEntityForm::init($form_state);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function buildForm(array $form, FormStateInterface $form_state) {
-    $form = parent::buildForm($form, $form_state);
+    $form = ContentEntityForm::buildForm($form, $form_state);
 
     // Build a summary table of profiles relevant to this step.
     $cached_values = &$form_state->getTemporaryValue('wizard');

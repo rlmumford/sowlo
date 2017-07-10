@@ -1,0 +1,5 @@
+name: Date Tools
+description: "Provides extra widgets for handling date fields."
+type: module
+package: RobTools
+core: 8.x

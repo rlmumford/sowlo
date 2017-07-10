@@ -64,7 +64,7 @@ abstract class CandidateRegisterProfile extends ContentEntityForm {
   /**
    * {@inheritdoc}
    */
-  protected function init(FormStateInterface $form_state) {
+  public function buildForm(array $form, FormStateInterface $form_state) {
     $cached_values = &$form_state->getTemporaryValue('wizard');
     $step = $this->getProfileStep();
     if (empty($cached_values['candidate_'.$step])) {
@@ -72,7 +72,7 @@ abstract class CandidateRegisterProfile extends ContentEntityForm {
     }
     $this->setEntity($cached_values['candidate_'.$step]);
 
-    parent::init($form_state);
+    return parent::buildForm($form, $form_state);
   }
 
   /**

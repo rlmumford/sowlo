@@ -8,10 +8,10 @@ dependencies:
     - field.field.profile.experience_work.workexp_job_title
     - field.field.profile.experience_work.workexp_location
     - field.field.profile.experience_work.workexp_projects
-    - field.field.profile.experience_work.workexp_responsibilities
     - field.field.profile.experience_work.workexp_start
     - profile.type.experience_work
   module:
+    - date_tools
     - datetime
     - inline_entity_form
     - paragraphs
@@ -37,10 +37,13 @@ content:
       display_label: true
     third_party_settings: {  }
   workexp_end:
-    type: datetime_datelist
+    type: datetime_partialdatelist
     weight: 5
     region: content
     settings:
+      components:
+        year: year
+        month: month
       date_order: DMY
       time_type: none
       increment: 15
@@ -75,23 +78,14 @@ content:
       form_display_mode: default
       default_paragraph_type: ''
     third_party_settings: {  }
-  workexp_responsibilities:
-    type: paragraphs
-    weight: 7
-    region: content
-    settings:
-      title: Paragraph
-      title_plural: Paragraphs
-      edit_mode: open
-      add_mode: dropdown
-      form_display_mode: default
-      default_paragraph_type: ''
-    third_party_settings: {  }
   workexp_start:
-    type: datetime_datelist
+    type: datetime_partialdatelist
     weight: 4
     region: content
     settings:
+      components:
+        year: year
+        month: month
       date_order: DMY
       time_type: none
       increment: 15

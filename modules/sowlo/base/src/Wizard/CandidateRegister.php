@@ -53,8 +53,12 @@ class CandidateRegister extends FormWizardBase {
         'form' => 'Drupal\sowlo_base\Form\CandidateRegisterEducation',
         'title' => $this->t('Education'),
       ],
+      'other_skills' => [
+        'form' => 'Drupal\sowlo_base\Form\CandidateRegisterOtherSkills',
+        'title' => $this->t('Additional Skills'),
+      ],
       'review' => [
-        'form' => 'Drupal\sowlow_base\Form\CandidateRegisterReview',
+        'form' => 'Drupal\sowlo_base\Form\CandidateRegisterPreview',
         'title' => $this->t('Review'),
       ],
     ];
@@ -103,6 +107,13 @@ class CandidateRegister extends FormWizardBase {
       if ($el['#op'] == 'next' && !$form_state->get('ajax')) {
         $form_state->setRedirect($this->getRouteName(), $this->getNextParameters($cached_values));
       }
+      else if ($el['#op'] == 'add_another') {
+        $form_state->setRedirect($this->getRouteName(),[
+          'machine_name' => $this->getMachineName(),
+          'step' => $this->getStep($cached_values),
+          'js' => 'nojs',
+        ]);
+      }
     }
   }
 
@@ -118,7 +129,9 @@ class CandidateRegister extends FormWizardBase {
 
     if ($form_object instanceof CandidateRegisterProfileMultiple) {
       $add_another_submit = $actions['submit']['#submit'];
+      array_pop($add_another_submit);
       $add_another_submit[] = [$form_object, 'submitFormAddAnother'];
+      $add_another_submit[] = '::submitForm';
       $actions['add_another'] = [
         '#type' => 'submit',
         '#value' => $this->t('Add Another @type', ['@type' => ($this->step == 'work') ? 'Job' : 'School']),
@@ -129,5 +142,38 @@ class CandidateRegister extends FormWizardBase {
       ];
     }
     return $actions;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function finish(array &$form, FormStateInterface $form_state) {
+    $cached_values = &$form_state->getTemporaryValue('wizard');
+    $user = $cached_values['candidate_user'];
+    $user->save();
+
+    foreach ($cached_values as $key => $value) {
+      if (substr($key, 0, 10) != 'candidate_') {
+        continue;
+      }
+
+      if ($key == 'candidate_user') {
+        continue;
+      }
+
+      if (is_array($value)) {
+        foreach ($value as $profile) {
+          $profile->setOwner($user);
+          $profile->save();
+        }
+      }
+      else if (is_object($value)) {
+        $value->setOwner($user);
+        $value->save();
+      }
+    }
+    $user->save();
+
+    parent::finish($form, $form_state);
   }
 }
