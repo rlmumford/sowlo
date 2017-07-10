@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.profile.other_skills
+    - paragraphs.paragraphs_type.experience_skills
+    - profile.type.other_skills
+  module:
+    - entity_reference_revisions
+id: profile.other_skills.other_skills
+field_name: other_skills
+entity_type: profile
+bundle: other_skills
+label: Skills
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      experience_skills: experience_skills
+    target_bundles_drag_drop:
+      experience_responsibilities:
+        weight: 3
+        enabled: false
+      experience_skills:
+        enabled: true
+        weight: 4
+field_type: entity_reference_revisions

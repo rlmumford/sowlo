@@ -2,15 +2,15 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.profile.workexp_skills
+    - field.storage.paragraph.proj_skills
+    - paragraphs.paragraphs_type.experience_project
     - paragraphs.paragraphs_type.experience_skills
-    - profile.type.experience_work
   module:
     - entity_reference_revisions
-id: profile.experience_work.workexp_skills
-field_name: workexp_skills
-entity_type: profile
-bundle: experience_work
+id: paragraph.experience_project.proj_skills
+field_name: proj_skills
+entity_type: paragraph
+bundle: experience_project
 label: Skills
 description: ''
 required: false
@@ -24,10 +24,16 @@ settings:
     target_bundles:
       experience_skills: experience_skills
     target_bundles_drag_drop:
+      education_qualification:
+        weight: 5
+        enabled: false
+      experience_project:
+        weight: 6
+        enabled: false
       experience_responsibilities:
-        weight: 3
+        weight: 7
         enabled: false
       experience_skills:
         enabled: true
-        weight: 4
+        weight: 8
 field_type: entity_reference_revisions

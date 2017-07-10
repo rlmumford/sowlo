@@ -4,10 +4,9 @@ dependencies:
   module:
     - entity_reference_revisions
     - paragraphs
-    - profile
-id: profile.workexp_skills
-field_name: workexp_skills
-entity_type: profile
+id: paragraph.proj_responsibilities
+field_name: proj_responsibilities
+entity_type: paragraph
 type: entity_reference_revisions
 settings:
   target_type: paragraph

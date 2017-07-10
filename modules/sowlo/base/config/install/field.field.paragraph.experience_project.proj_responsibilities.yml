@@ -1,0 +1,40 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.proj_responsibilities
+    - paragraphs.paragraphs_type.experience_project
+    - paragraphs.paragraphs_type.experience_responsibilities
+  module:
+    - entity_reference_revisions
+id: paragraph.experience_project.proj_responsibilities
+field_name: proj_responsibilities
+entity_type: paragraph
+bundle: experience_project
+label: Responsibilities
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      experience_responsibilities: experience_responsibilities
+    target_bundles_drag_drop:
+      education_qualification:
+        weight: 5
+        enabled: false
+      experience_project:
+        weight: 6
+        enabled: false
+      experience_responsibilities:
+        enabled: true
+        weight: 7
+      experience_skills:
+        weight: 8
+        enabled: false
+field_type: entity_reference_revisions
+
