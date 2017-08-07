@@ -136,4 +136,31 @@ class Role extends ContentEntityBase implements RoleInterface {
     return $fields;
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function getOwner() {
+    return $this->get('owner')->entity;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getOwnerId() {
+    return $this->get('owner')->target_id;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setOwner(UserInterface $owner) {
+    $this->owner->entity = $owner;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setOwnerId($uid) {
+    $this->owner->target_id = $uid;
+  }
 }

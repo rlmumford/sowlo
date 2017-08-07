@@ -5,6 +5,7 @@ namespace Drupal\sowlo_ranking;
 use Drupal\Component\Plugin\PluginBase;
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Entity\EntityTypeManager;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\sowlo_ranking\Entity\CandidateRank;
 use Drupal\sowlo_ranking\RankingGameInterface;
 use Drupal\sowlo_role\Entity\Role;
@@ -44,7 +45,7 @@ abstract class RankingGameBase extends PluginBase implements RankingGameInterfac
       $container->get('entity_type.manager'),
       $container->get('database'),
       $configuration,
-      $plugin,
+      $plugin_id,
       $plugin_definition
     );
   }
@@ -107,9 +108,9 @@ abstract class RankingGameBase extends PluginBase implements RankingGameInterfac
     $query->condition('category', $this->getPluginId());
     $rank_ids = $query->execute();
 
-    $user_ids = $this->databaseConnection->select('candidate_rank_data', 'crd')
-      ->condition('crd.id', $rank_ids)
-      ->fields('crd', ['candidate'])
+    $user_ids = $this->databaseConnection->select('candidate_rank', 'c')
+      ->condition('c.id', $rank_ids)
+      ->fields('c', ['candidate'])
       ->execute()->fetchCol();
 
     $query = $this->getEntityQuery('user');
@@ -128,7 +129,7 @@ abstract class RankingGameBase extends PluginBase implements RankingGameInterfac
       $candidate_rank->role->target_id = $role->id();
       $candidate_rank->category->value = $this->getPluginId();
       $candidate_rank->rank->value = 200;
-      $candidate_rank->key->value = $this->getPluginId()."--".$role->id()."--".$candidate_id;
+      $candidate_rank->name->value = $this->getPluginId()."--".$role->id()."--".$candidate_id;
       $candidate_rank->save();
 
       foreach ($rank_ids as $rank_id) {
@@ -160,7 +161,7 @@ abstract class RankingGameBase extends PluginBase implements RankingGameInterfac
         $candidate_rank->candidate->target_id = $candidate->id();
         $candidate_rank->category->value = $this->getPluginId();
         $candidate_rank->rank->value = 200;
-        $candidate_rank->key->value = $this->getPluginId()."----".$candidate_id;
+        $candidate_rank->name->value = $this->getPluginId()."----".$candidate->id();
         $candidate_rank->save();
 
         $pairs = [];
@@ -200,7 +201,7 @@ abstract class RankingGameBase extends PluginBase implements RankingGameInterfac
       $candidate_rank->role->target_id = $role_id;
       $candidate_rank->category->value = $this->getPluginId();
       $candidate_rank->rank->value = 200;
-      $candidate_rank->key->value = $this->getPluginId()."--".$role_id."--".$candidate->id();
+      $candidate_rank->name->value = $this->getPluginId()."--".$role_id."--".$candidate->id();
       $candidate_rank->save();
 
       foreach ($other_rank_ids as $other_rank_id) {
@@ -217,6 +218,10 @@ abstract class RankingGameBase extends PluginBase implements RankingGameInterfac
    * @var array $pairs
    */
   protected function spool(array $pairs) {
+    if (empty($pairs)) {
+      return TRUE;
+    }
+
     $query = $this->databaseConnection->insert('sowlo_ranking_spool');
     $query->fields(['idA', 'idB', 'handler', 'queued']);
 

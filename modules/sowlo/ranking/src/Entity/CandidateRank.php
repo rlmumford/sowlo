@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\sowlo_rank\Entity;
+namespace Drupal\sowlo_ranking\Entity;
 
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
@@ -25,7 +25,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
  *   revision_data_table = "candidate_rank_revision_data",
  *   entity_keys = {
  *     "id" = "id",
- *     "label" = "key",
+ *     "label" = "name",
  *     "revision" = "vid",
  *     "uuid" = "uuid"
  *   },
@@ -40,8 +40,8 @@ class CandidateRank extends ContentEntityBase {
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
     $fields = parent::baseFieldDefinitions($entity_type);
 
-    $fields['key'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Key'))
+    $fields['name'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Name'))
       ->setRequired(TRUE)
       ->setRevisionable(FALSE)
       ->setSetting('max_length', 255);

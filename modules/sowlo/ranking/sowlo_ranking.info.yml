@@ -1,6 +1,6 @@
-name: SOWLO Ranking
+name: Sowlo Ranking
 type: module
-package: SOWLO
+package: Sowlo
 description: 'Ranks candidates.'
 core: 8.x
 dependecies:

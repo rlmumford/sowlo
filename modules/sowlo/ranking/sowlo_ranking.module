@@ -1,11 +1,13 @@
 <?php
 
+use Drupal\user\UserInterface;
 use Drupal\sowlo_ranking\Entity\CandidateRank;
 
 /**
  * Implements hook_cron().
  */
 function sowlo_ranking_cron() {
+  return;
   $query = \Drupal::database()->select('sowlo_ranking_spool', 'srs');
   $query->fields('srs', ['idA', 'idB', 'handler']);
   $query->condition('srs.started', 0);
@@ -31,5 +33,29 @@ function sowlo_ranking_cron() {
       ->condition('idB', $game->idB)
       ->condition('handler', $game->handler)
       ->execute();
+  }
+}
+
+/**
+ * Implements hook_user_insert().
+ */
+function sowlo_ranking_user_insert(UserInterface $user) {
+  if ($user->hasRole('candidate')) {
+    $game_manager = \Drupal::service('plugin.manager.ranking_game');
+    foreach ($game_manager->getDefinitions() as $plugin_id => $definition) {
+      $game_manager->createInstance($plugin_id)->spoolGamesOnNewCandidate($user);
+    }
+  }
+}
+
+/**
+ * Implmenets hook_user_update().
+ */
+function sowlo_ranking_user_update(UserInterface $user) {
+  if ($user->hasRole('candidate') && !$user->original->hasRole('candidate')) {
+    $game_manager = \Drupal::service('plugin.manager.ranking_game');
+    foreach ($game_manager->getDefinitions() as $plugin_id => $definition) {
+      $game_manager->createInstance($plugin_id)->spoolGamesOnNewCandidate($user);
+    }
   }
 }

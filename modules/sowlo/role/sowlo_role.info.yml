@@ -1,6 +1,6 @@
-name: SOWLO Role
+name: Sowlo Role
 type: module
-package: SOWLO
+package: Sowlo
 description: 'Provides job roles.'
 core: 8.x
 dependencies:

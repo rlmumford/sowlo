@@ -33,7 +33,6 @@ class RankingGameManager extends DefaultPluginManager {
     );
     $this->alterInfo('ranking_game_info');
     $this->setCacheBackend($cache_backend, 'ranking_game_plugins');
-    $this->factory = new DefaultFactory($this->getDiscovery());
   }
 
 }

@@ -8,6 +8,8 @@ use Drupal\Component\Annotation\Plugin;
  * Defines an Ranking Game annotation object.
  *
  * Plugin Namespace: Plugin\RankingGame
+ *
+ * @Annotation
  */
 class RankingGame extends Plugin {
 

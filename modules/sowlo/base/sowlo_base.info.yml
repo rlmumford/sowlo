@@ -14,3 +14,4 @@ dependencies:
   - location
   - inline_entity_form
   - ief_table_view_mode
+  - date_tools
