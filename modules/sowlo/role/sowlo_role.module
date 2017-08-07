@@ -1,0 +1,55 @@
+<?php
+
+/**
+ * @file
+ * Support for configurable user sowlo_roles.
+ */
+
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\Core\Field\FieldItemListInterface;
+use Drupal\Core\Render\Element;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\user\UserInterface;
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\Entity\EntityFormDisplay;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\sowlo_role\Entity\Role;
+use Drupal\field\FieldConfigInterface;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_theme().
+ */
+function sowlo_role_theme() {
+  return [
+    'sowlo_role' => [
+      'render element' => 'elements',
+    ],
+  ];
+}
+
+/**
+ * Prepares variables for sowlo_role templates.
+ *
+ * Default template: sowlo_role.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - elements: An associative array containing rendered fields.
+ *   - attributes: HTML attributes for the containing element.
+ */
+function template_preprocess_sowlo_role(array &$variables) {
+  /** @var Drupal\sowlo_role\Entity\RoleInterface $sowlo_role */
+  $sowlo_role = $variables['elements']['#sowlo_role'];
+
+  $variables['sowlo_role'] = $sowlo_role;
+  $variables['url'] = $sowlo_role->toUrl();
+  // Helpful $content variable for templates.
+  $variables['content'] = [];
+  foreach (Element::children($variables['elements']) as $key) {
+    $variables['content'][$key] = $variables['elements'][$key];
+  }
+}

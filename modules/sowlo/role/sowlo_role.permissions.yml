@@ -1,0 +1,3 @@
+administer sowlo_roles:
+  title: 'Administer Job Roles'
+  restrict access: true

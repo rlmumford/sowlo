@@ -1,0 +1,11 @@
+name: SOWLO Role
+type: module
+package: SOWLO
+description: 'Provides job roles.'
+core: 8.x
+dependencies:
+  - user
+  - entity
+  - field
+  - views
+  - system (>=8.1.0)

@@ -1,0 +1,8 @@
+name: SOWLO Ranking
+type: module
+package: SOWLO
+description: 'Ranks candidates.'
+core: 8.x
+dependecies:
+  - sowlo_role
+  - sowlo_base

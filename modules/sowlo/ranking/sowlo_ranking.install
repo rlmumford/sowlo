@@ -1,0 +1,62 @@
+<?php
+
+/**
+ * Implements hook_schema().
+ */
+function sowlo_ranking_schema() {
+  $schema['sowlo_ranking_spool'] = [
+    'description' => 'Spool for ranked battles.',
+    'fields' => [
+      'idA' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => 'The first key of this battle.',
+      ],
+      'idB' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'description' => 'The second key of this battle.',
+      ],
+      'handler' => [
+        'type' => 'varchar_ascii',
+        'length' => 255,
+        'not null' => TRUE,
+        'description' => 'The handler used for this battle.',
+      ],
+      'queued' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Time the battle was queued.',
+      ],
+      'started' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Time the battle started.',
+      ],
+      'finished' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Time the battle was finished.',
+      ],
+      'priority' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Priority',
+      ],
+    ],
+    'primary key' => ['idA', 'idB'],
+    'indexes' => [
+      'idA' => ['idA'],
+      'idB' => ['idB'],
+      'handler' => ['handler'],
+      'queued' => ['queued'],
+      'started' => ['started'],
+    ],
+  ];
+
+  return $schema;
+}

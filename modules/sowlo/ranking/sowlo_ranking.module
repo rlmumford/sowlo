@@ -1,0 +1,35 @@
+<?php
+
+use Drupal\sowlo_ranking\Entity\CandidateRank;
+
+/**
+ * Implements hook_cron().
+ */
+function sowlo_ranking_cron() {
+  $query = \Drupal::database()->select('sowlo_ranking_spool', 'srs');
+  $query->fields('srs', ['idA', 'idB', 'handler']);
+  $query->condition('srs.started', 0);
+  $query->orderBy('srs.queued', 'ASC');
+  $query->range(0, 50);
+  $games = $query->execute()->fetchAll(\PDO::FETCH_OBJ);
+
+  $game_manager = \Drupal::service('plugin.manager.ranking_game');
+  foreach ($games as $game) {
+    \Drupal::database()->update('sowlo_ranking_spool')
+      ->fields(['started' => time()])
+      ->condition('idA', $game->idA)
+      ->condition('idB', $game->idB)
+      ->condition('handler', $game->handler)
+      ->execute();
+
+    $plugin = $game_manager->createInstance($game->handler);
+    $plugin->game(CandidateRank::load($game->idA), CandidateRank::load($game->idB));
+
+    \Drupal::database()->update('sowlo_ranking_spool')
+      ->fields(['finished' => time()])
+      ->condition('idA', $game->idA)
+      ->condition('idB', $game->idB)
+      ->condition('handler', $game->handler)
+      ->execute();
+  }
+}

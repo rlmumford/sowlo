@@ -1,0 +1,7 @@
+entity.sowlo_role.canonical:
+  path: '/sowlo_role/{sowlo_role}'
+  defaults:
+    _entity_view: '\Drupal\sowlo_role\Controller\RoleViewController::view'
+    _title_callback: '\Drupal\sowlo_role\Controller\RoleViewController::title'
+  requirements:
+    _entity_access: 'sowlo_role.view'
