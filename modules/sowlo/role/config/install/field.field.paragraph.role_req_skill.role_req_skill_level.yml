@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.role_req_skill_level
+    - paragraphs.paragraphs_type.role_req_skill
+  module:
+    - options
+id: paragraph.role_req_skill.role_req_skill_level
+field_name: role_req_skill_level
+entity_type: paragraph
+bundle: role_req_skill
+label: 'Required Level'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

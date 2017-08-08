@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: role_req_responsibility
+label: 'Responsibility Requirement'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

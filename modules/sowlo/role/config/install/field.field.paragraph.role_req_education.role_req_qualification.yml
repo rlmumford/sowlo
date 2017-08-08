@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.role_req_qualification
+    - paragraphs.paragraphs_type.role_req_education
+    - taxonomy.vocabulary.education_qualifications
+id: paragraph.role_req_education.role_req_qualification
+field_name: role_req_qualification
+entity_type: paragraph
+bundle: role_req_education
+label: Qualification
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      education_qualifications: education_qualifications
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
+

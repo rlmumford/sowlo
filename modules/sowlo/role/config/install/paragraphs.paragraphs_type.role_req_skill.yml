@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: role_req_skill
+label: 'Skill Requirement'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

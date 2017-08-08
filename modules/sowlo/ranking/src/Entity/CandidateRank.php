@@ -72,6 +72,13 @@ class CandidateRank extends ContentEntityBase {
       ->setLabel(t('Message'))
       ->setRevisionable(TRUE);
 
+    $fields['excluded'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Excluded'))
+      ->setDescription(t('Has this candidate been excluded from the system.'))
+      ->setRevisionable(TRUE)
+      ->setDefaultValue(FALSE);
+
+
     return $fields;
   }
 }

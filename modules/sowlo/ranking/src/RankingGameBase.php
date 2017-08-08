@@ -18,6 +18,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 abstract class RankingGameBase extends PluginBase implements RankingGameInterface, ContainerFactoryPluginInterface {
 
+  const GAME_INVALID = -1;
+
   /**
    * Entity type manager.
    *
@@ -83,6 +85,10 @@ abstract class RankingGameBase extends PluginBase implements RankingGameInterfac
     $eb = $rb / ($ra + $rb);
 
     $sa = $this->determineWinner($candidateA, $candidateB);
+    if ($sa == RankingGameBase::GAME_INVALID) {
+      return;
+    }
+
     $sb = 1 - $sa;
 
     $k = $this->getPluginDefinition()['k_value'];
@@ -106,7 +112,8 @@ abstract class RankingGameBase extends PluginBase implements RankingGameInterfac
     $query = $this->getEntityQuery('candidate_rank');
     $query->condition('role.target_id', $role->id());
     $query->condition('category', $this->getPluginId());
-    $rank_ids = $query->execute();
+    $all_rank_ids = $query->execute();
+    $inc_rank_ids = $query->condition('excluded', FALSE)->execute();
 
     $user_ids = $this->databaseConnection->select('candidate_rank', 'c')
       ->condition('c.id', $rank_ids)
@@ -132,11 +139,11 @@ abstract class RankingGameBase extends PluginBase implements RankingGameInterfac
       $candidate_rank->name->value = $this->getPluginId()."--".$role->id()."--".$candidate_id;
       $candidate_rank->save();
 
-      foreach ($rank_ids as $rank_id) {
+      foreach ($inc_rank_ids as $rank_id) {
         $pairs[] = [$candidate_rank->id(), $rank_id];
       }
 
-      $rank_ids[] = $candidate_rank->id();
+      $inc_rank_ids[] = $candidate_rank->id();
     }
 
     $this->spool($pairs);
@@ -155,6 +162,7 @@ abstract class RankingGameBase extends PluginBase implements RankingGameInterfac
       if (empty($rank_ids)) {
         $other_rank_ids = $this->getEntityQuery('candidate_rank')
           ->condition('category', $this->getPluginId())
+          ->condition('excluded', FALSE)
           ->execute();
 
         $candidate_rank = $this->getEntityStorage('candidate_rank')->create([]);
@@ -195,6 +203,7 @@ abstract class RankingGameBase extends PluginBase implements RankingGameInterfac
       $other_rank_ids = $this->getEntityQuery('candidate_rank')
         ->condition('category', $this->getPluginId())
         ->condition('role', $role_id)
+        ->condition('excluded', FALSE)
         ->execute();
       $candidate_rank = $this->getEntityStorage('candidate_rank')->create([]);
       $candidate_rank->candidate->target_id = $candidate->id();
@@ -262,6 +271,41 @@ abstract class RankingGameBase extends PluginBase implements RankingGameInterfac
    */
   protected function getEntityStorage($entity_type_id) {
     return $this->entityTypeManager->getStorage($entity_type_id);
+  }
+
+  /**
+   * Exclude a candidate from a role.
+   *
+   * @param \Drupal\user\UserInterface $candidate
+   *   The candidate to exclude.
+   * @param \Drupal\sowlo_role\Entity\Role $role
+   *   The role to exclude the candidate from.
+   */
+  protected function excludeCandidate(UserInterface $candidate, Role $role, $reason = '') {
+    // Load all CandidateRanks related to this $candidate and $role.
+    $cr_ids = $this->getEntityQuery('candidate_rank')
+      ->condition('candidate', $candidate->id())
+      ->condition('role', $role->id())
+      ->execute();
+
+    // Set the log message, excluded flag and rank value for each excluded candidate rank.
+    foreach ($this->getEntityStorage('candidate_rank')->load($cr_ids) as $candidate_rank) {
+      $candidate_rank->log->value = t(
+        'Excluded by @handler because @reason',
+        [
+          '@handler' => $this->getPluginDefinition()['label'],
+          '@reason' => $reason,
+        ]
+      );
+      $candidate_rank->excluded->value = TRUE;
+      $candidate_rank->rank->value = 0;
+      $candidate_rank->save();
+    }
+
+    // Delete games from the spool.
+    $this->databaseConnection->delete('sowlo_ranking_spool')
+      ->condition((new Condition('OR'))->condition('idA', $cr_ids)->condition('idB', $cr_ids))
+      ->execute();
   }
 
 }

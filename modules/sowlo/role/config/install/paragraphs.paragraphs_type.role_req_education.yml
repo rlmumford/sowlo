@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: role_req_education
+label: 'Education Requirement'
+icon_uuid: null
+description: ''
+behavior_plugins: {  }

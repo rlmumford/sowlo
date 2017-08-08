@@ -2,12 +2,12 @@
 
 use Drupal\user\UserInterface;
 use Drupal\sowlo_ranking\Entity\CandidateRank;
+use Drupal\sowlo_role\Entity\Role;
 
 /**
  * Implements hook_cron().
  */
 function sowlo_ranking_cron() {
-  return;
   $query = \Drupal::database()->select('sowlo_ranking_spool', 'srs');
   $query->fields('srs', ['idA', 'idB', 'handler']);
   $query->condition('srs.started', 0);
@@ -17,6 +17,12 @@ function sowlo_ranking_cron() {
 
   $game_manager = \Drupal::service('plugin.manager.ranking_game');
   foreach ($games as $game) {
+    $rankA = CandidateRank::load($game->idA);
+    $rankB = CandidateRank::load($game->idB);
+    if ($rankA->excluded->value || $rankB->excluded->value) {
+      continue;
+    }
+
     \Drupal::database()->update('sowlo_ranking_spool')
       ->fields(['started' => time()])
       ->condition('idA', $game->idA)
@@ -25,7 +31,7 @@ function sowlo_ranking_cron() {
       ->execute();
 
     $plugin = $game_manager->createInstance($game->handler);
-    $plugin->game(CandidateRank::load($game->idA), CandidateRank::load($game->idB));
+    $plugin->game($rankA, $rankB);
 
     \Drupal::database()->update('sowlo_ranking_spool')
       ->fields(['finished' => time()])
@@ -33,6 +39,16 @@ function sowlo_ranking_cron() {
       ->condition('idB', $game->idB)
       ->condition('handler', $game->handler)
       ->execute();
+  }
+}
+
+/**
+ * Implements hook_sowlo_role_insert().
+ */
+function sowlo_ranking_sowlo_role_insert(Role $role) {
+  $game_manager = \Drupal::service('plugin.manager.ranking_game');
+  foreach ($game_manager->getDefinitions() as $plugin_id => $definition) {
+    $game_manager->createInstance($plugin_id)->spoolGamesOnNewRole($role);
   }
 }
 

@@ -7,6 +7,7 @@ use Drupal\Core\Entity\EntityChangedTrait;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\user\UserInterface;
@@ -132,6 +133,84 @@ class Role extends ContentEntityBase implements RoleInterface {
       ->setLabel(t('Changed'))
       ->setDescription(t('The time when the sowlo_role was last edited.'))
       ->setRevisionable(TRUE);
+
+    $fields['essential_req'] = BaseFieldDefinition::create('entity_reference_revisions')
+      ->setLabel(t('Essential Requirements'))
+      ->setDescription(t('Requirements that are essential for the role.'))
+      ->setSetting('target_type', 'paragraph')
+      ->setSetting('handler', 'default:paragraph')
+      ->setSetting('handler_settings', [
+        'negate' => 0,
+        'target_bundles' => [
+          'role_req_responsibility' => 'role_req_responsibility',
+          'role_req_education' => 'role_req_education',
+          'role_req_skill' => 'role_req_skill',
+        ],
+      ])
+      ->setRevisionable(TRUE)
+      ->setCardinality(FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED)
+      ->setDisplayOptions('form', [
+        'type' => 'paragraphs',
+        'settings' => [
+          'title' => 'Essential Requirement',
+          'title_plural' => 'Essential Requirements',
+          'edit_mode' => 'open',
+          'add_mode' => 'dropdown',
+          'form_display_mode' => 'default',
+        ],
+      ]);
+
+    $fields['important_req'] = BaseFieldDefinition::create('entity_reference_revisions')
+      ->setLabel(t('Important Requirements'))
+      ->setDescription(t('Requirements that, although not essential, are important for the role.'))
+      ->setSetting('target_type', 'paragraph')
+      ->setSetting('handler', 'default:paragraph')
+      ->setSetting('handler_settings', [
+        'negate' => 0,
+        'target_bundles' => [
+          'role_req_responsibility' => 'role_req_responsibility',
+          'role_req_education' => 'role_req_education',
+          'role_req_skill' => 'role_req_skill',
+        ],
+      ])
+      ->setRevisionable(TRUE)
+      ->setCardinality(FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED)
+      ->setDisplayOptions('form', [
+        'type' => 'paragraphs',
+        'settings' => [
+          'title' => 'Important Requirement',
+          'title_plural' => 'Important Requirements',
+          'edit_mode' => 'open',
+          'add_mode' => 'dropdown',
+          'form_display_mode' => 'default',
+        ],
+      ]);
+
+    $fields['bonus_req'] = BaseFieldDefinition::create('entity_reference_revisions')
+      ->setLabel(t('Bonus Requirements'))
+      ->setDescription(t('Requirements that, although not essential, would be helpful for the role.'))
+      ->setSetting('target_type', 'paragraph')
+      ->setSetting('handler', 'default:paragraph')
+      ->setSetting('handler_settings', [
+        'negate' => 0,
+        'target_bundles' => [
+          'role_req_responsibility' => 'role_req_responsibility',
+          'role_req_education' => 'role_req_education',
+          'role_req_skill' => 'role_req_skill',
+        ],
+      ])
+      ->setRevisionable(TRUE)
+      ->setCardinality(FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED)
+      ->setDisplayOptions('form', [
+        'type' => 'paragraphs',
+        'settings' => [
+          'title' => 'Bonus Requirement',
+          'title_plural' => 'Bonus Requirements',
+          'edit_mode' => 'open',
+          'add_mode' => 'dropdown',
+          'form_display_mode' => 'default',
+        ],
+      ]);
 
     return $fields;
   }
