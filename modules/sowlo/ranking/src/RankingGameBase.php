@@ -121,7 +121,9 @@ abstract class RankingGameBase extends PluginBase implements RankingGameInterfac
       ->execute()->fetchCol();
 
     $query = $this->getEntityQuery('user');
-    $query->condition('uid', $user_ids, 'NOT IN');
+    if (!empty($user_ids)) {
+      $query->condition('uid', $user_ids, 'NOT IN');
+    }
     $query->condition('status', 1);
     $query->condition('roles', 'candidate');
 

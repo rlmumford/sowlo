@@ -17,6 +17,13 @@ use Drupal\user\UserInterface;
 class RoleController extends ControllerBase implements ContainerInjectionInterface {
 
   /**
+   * Provides the title for the sowlo role page.
+   */
+  public function title(Role $sowlo_role) {
+    return ['#markup' => $role->label()];
+  }
+
+  /**
    * Provides the sowlo_role submission form.
    *
    * @param \Drupal\Core\Routing\RouteMatchInterface $route_match

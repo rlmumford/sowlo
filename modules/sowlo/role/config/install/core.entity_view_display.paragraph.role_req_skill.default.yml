@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.role_req_skill.role_req_skill
+    - field.field.paragraph.role_req_skill.role_req_skill_level
+    - paragraphs.paragraphs_type.role_req_skill
+  module:
+    - options
+id: paragraph.role_req_skill.default
+targetEntityType: paragraph
+bundle: role_req_skill
+mode: default
+content:
+  role_req_skill:
+    type: entity_reference_label
+    weight: 0
+    region: content
+    label: inline
+    settings:
+      link: false
+    third_party_settings: {  }
+  role_req_skill_level:
+    type: list_default
+    weight: 1
+    region: content
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

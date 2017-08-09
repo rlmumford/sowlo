@@ -6,11 +6,16 @@ dependencies:
     - field.field.paragraph.experience_project.proj_description
     - field.field.paragraph.experience_project.proj_from
     - field.field.paragraph.experience_project.proj_name
+    - field.field.paragraph.experience_project.proj_responsibilities
+    - field.field.paragraph.experience_project.proj_skills
     - field.field.paragraph.experience_project.proj_to
     - paragraphs.paragraphs_type.experience_project
   module:
     - datetime
+    - paragraphs
     - text
+_core:
+  default_config_hash: gL2a4cCK5AplWjKVQ3eNqsyWG1Ncxc32t9cMlWYywvc
 id: paragraph.experience_project.default
 targetEntityType: paragraph
 bundle: experience_project
@@ -47,6 +52,30 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  proj_responsibilities:
+    type: paragraphs
+    weight: 5
+    region: content
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+  proj_skills:
+    type: paragraphs
+    weight: 6
+    region: content
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
   proj_to:
     type: datetime_default
     weight: 3
@@ -57,4 +86,3 @@ hidden:
   created: true
   status: true
   uid: true
-

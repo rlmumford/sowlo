@@ -150,6 +150,7 @@ class CandidateRegister extends FormWizardBase {
   public function finish(array &$form, FormStateInterface $form_state) {
     $cached_values = &$form_state->getTemporaryValue('wizard');
     $user = $cached_values['candidate_user'];
+    $user->addRole('candidate');
     $user->save();
 
     foreach ($cached_values as $key => $value) {

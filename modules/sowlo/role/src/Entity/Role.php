@@ -47,6 +47,7 @@ use Drupal\user\UserInterface;
  *   },
  *  links = {
  *    "canonical" = "/sowlo_role/{sowlo_role}",
+ *    "add-form" = "/sowlo_role/add",
  *    "edit-form" = "/sowlo_role/{sowlo_role}/edit",
  *    "delete-form" = "/sowlo_role/{sowlo_role}/delete",
  *    "collection" = "/sowlo_role",
@@ -158,6 +159,12 @@ class Role extends ContentEntityBase implements RoleInterface {
           'add_mode' => 'dropdown',
           'form_display_mode' => 'default',
         ],
+      ])
+      ->setDisplayOptions('view', [
+        'type' => 'entity_reference_revisions_entity_view',
+        'settings' => [
+          'view_mode' => 'default',
+        ],
       ]);
 
     $fields['important_req'] = BaseFieldDefinition::create('entity_reference_revisions')
@@ -184,6 +191,12 @@ class Role extends ContentEntityBase implements RoleInterface {
           'add_mode' => 'dropdown',
           'form_display_mode' => 'default',
         ],
+      ])
+      ->setDisplayOptions('view', [
+        'type' => 'entity_reference_revisions_entity_view',
+        'settings' => [
+          'view_mode' => 'default',
+        ],
       ]);
 
     $fields['bonus_req'] = BaseFieldDefinition::create('entity_reference_revisions')
@@ -209,6 +222,12 @@ class Role extends ContentEntityBase implements RoleInterface {
           'edit_mode' => 'open',
           'add_mode' => 'dropdown',
           'form_display_mode' => 'default',
+        ],
+      ])
+      ->setDisplayOptions('view', [
+        'type' => 'entity_reference_revisions_entity_view',
+        'settings' => [
+          'view_mode' => 'default',
         ],
       ]);
 

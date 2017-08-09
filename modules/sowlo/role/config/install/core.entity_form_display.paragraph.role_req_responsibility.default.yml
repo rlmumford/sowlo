@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.role_req_responsibility.role_req_responsibility
+    - paragraphs.paragraphs_type.role_req_responsibility
+id: paragraph.role_req_responsibility.default
+targetEntityType: paragraph
+bundle: role_req_responsibility
+mode: default
+content:
+  role_req_responsibility:
+    type: entity_reference_autocomplete_tags
+    weight: 0
+    region: content
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
+  uid: true

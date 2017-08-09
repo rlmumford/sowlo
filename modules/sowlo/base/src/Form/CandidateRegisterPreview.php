@@ -52,12 +52,14 @@ class CandidateRegisterPreview extends FormBase {
     $cached_values = &$form_state->getTemporaryValue('wizard');
 
     $personal_profile = $cached_values['candidate_personal'];
-    $form['cache'] = ['max-age' => 0];
-    $form['personal'] = [
-      '#type' => 'fieldset',
-      '#title' => $this->t('Personal Details'),
-      'name' => $personal_profile->indiv_name->view(['type' => 'name']),
-    ];
+    if ($personal_profile->indiv_name) {
+      $form['cache'] = ['max-age' => 0];
+      $form['personal'] = [
+        '#type' => 'fieldset',
+        '#title' => $this->t('Personal Details'),
+        'name' => $personal_profile->indiv_name->view(['type' => 'name']),
+      ];
+    }
 
     return $form;
   }
