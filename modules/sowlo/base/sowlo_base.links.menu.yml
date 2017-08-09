@@ -1,0 +1,5 @@
+sowlo_base.config:
+  route_name: sowlo_base.config
+  parent: system.admin_config
+  title: Sowlo
+  weight: 4

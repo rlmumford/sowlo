@@ -1,0 +1,6 @@
+sowlo_test.import_terms:
+  title: 'Import Terms'
+  description: 'Import terms for Educational Institutions & Qualifications, Skills, Responsibilities and Industries.'
+  route_name: sowlo_test.import_terms
+  parent: sowlo_base.config
+  weight: 10

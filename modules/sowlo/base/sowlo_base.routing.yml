@@ -1,3 +1,11 @@
+sowlo_base.config:
+  path: '/admin/config/sowlo'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'Sowlo'
+  requirements:
+    _permission: 'administer sowlo'
+
 sowlo_base.candidate.register:
   path: '/user/register/candidate'
   defaults:

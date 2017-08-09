@@ -1,0 +1,7 @@
+sowlo_test.import_terms:
+  path: '/admin/config/sowlo/import_terms'
+  defaults:
+    _form: '\Drupal\sowlo_test\Form\TermImportForm'
+    _title: 'Import Terms'
+  requirements:
+    _permission: 'administer sowlo'
