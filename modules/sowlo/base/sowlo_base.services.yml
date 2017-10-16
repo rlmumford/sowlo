@@ -1,0 +1,4 @@
+services:
+  sowlo.candidate_importer:
+    class: \Drupal\sowlo_base\CandidateImporter
+    arguments: ['@entity_type.manager']
