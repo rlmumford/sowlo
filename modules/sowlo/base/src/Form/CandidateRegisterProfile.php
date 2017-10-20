@@ -78,7 +78,7 @@ abstract class CandidateRegisterProfile extends ContentEntityForm {
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array $form, FormStateInterface $form_state) {
+  public function submitForm(array &$form, FormStateInterface $form_state) {
     parent::submitForm($form, $form_state);
     $cached_values = &$form_state->getTemporaryValue('wizard');
     $step = $this->getProfileStep();

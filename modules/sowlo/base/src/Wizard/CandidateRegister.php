@@ -89,7 +89,7 @@ class CandidateRegister extends FormWizardBase {
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array $form, FormStateInterface $form_state) {
+  public function submitForm(array &$form, FormStateInterface $form_state) {
     $el = $form_state->getTriggeringElement();
     if (in_array($el['#op'], ['next','add_another'])) {
       $cached_values = $form_state->getTemporaryValue('wizard');
